@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       {/* ...makes the props not an array but an object */}
-      <Palette {...seedColors[4]}/>
+      <Palette {...seedColors[1]}/>
     </div>
   );
 }
