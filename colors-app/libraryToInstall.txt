@@ -1,0 +1,7 @@
+inside the colors-app folder
+
+npm install --save chroma-js
+npm install --save rc-slider
+npm install --save react-copy-to-clipboard
+npm install --save @material-ui/core
+npm install --save @material-ui/icons
