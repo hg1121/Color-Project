@@ -5,3 +5,4 @@ npm install --save rc-slider
 npm install --save react-copy-to-clipboard
 npm install --save @material-ui/core
 npm install --save @material-ui/icons
+npm install --save react-router-dom
