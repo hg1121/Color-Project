@@ -8,6 +8,16 @@
     margin-bottom: -3.5px;
 }
 
+/* overwrite the height of colorBox inside the SingleColorPalette */
+.SingleColorPalette .ColorBox{
+    height:50%;
+}
+
+.go-back.ColorBox{
+    background-color: black;
+}
+
+.back-button,
 .copy-button{
     width: 100px;
     height: 30px;
@@ -27,6 +37,11 @@
     border-radius: 300px;
     border: none;
     opacity: 0;
+}
+
+.back-button{
+    opacity: 1;
+    text-decoration: none;
 }
 
 /* when hover the colorbox, opacity of copy button to be 1 */
@@ -78,6 +93,10 @@
     font-size: 12px;
 } 
 
+.light-text {
+    color:white
+}
+
 .see-more{
     background: rgba(255, 255, 255, 0.3);
     position: absolute;
@@ -89,6 +108,10 @@
     height: 30px;
     text-align: center;
     line-height: 30px;
+}
+
+.ColorBox .dark-text{
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .copy-overlay {
@@ -143,6 +166,6 @@
 }
 
 .copy-msg p{
-    font-size: 1.8rem;
-    font-weight: 100;
+    font-size: 3rem;
+    font-weight: 200;
 }
