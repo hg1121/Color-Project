@@ -7,9 +7,11 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import './Navbar.css';
+import { withStyles } from '@material-ui/styles';
+import styles from './styles/Navbar';
 
-export default class Navbar extends Component {
+
+class Navbar extends Component {
     constructor(props){
         super(props);
         this.state = {format: 'hex', open:false};
@@ -27,29 +29,31 @@ export default class Navbar extends Component {
     }
 
     render() {
-        const {level, changeLevel } = this.props;
+        const {level, changeLevel, classes } = this.props;
         const {format, open} = this.state;
         return (
-            <header className='Navbar'>
-                <div className='logo'>
+            <header className={classes.Navbar}>
+                <div className={classes.logo}>
                     <Link to='/'>reactcolorpicker</Link>
                 </div>
                 {this.props.showSlideBar && (
                     <div className='slider-container'>
                         <span>Level: {level}</span>
-                        <div className='slider'>
+                        <div className={classes.slider}>
                             <Slider 
+                                dots step={100}
                                 defaultValue={level} 
                                 min={100} 
                                 max={900}
-                                step={100}
                                 onAfterChange={changeLevel}
+                                dotStyle={{ borderColor: 'orange', width: '11px', height: '11px'}} 
+                                activeDotStyle={{ borderColor: 'yellow' }}
                             /> 
                         </div>
                     </div>
                 )}
                 
-                <div className='select-container'>
+                <div className={classes.selectContainer}>
                     <Select onChange={this.handleFormatChange} value = {format} >
                         <MenuItem value='hex'> HEX - #ffffff</MenuItem>
                         <MenuItem value='rgb'> RGB - rgb(255, 255, 255)</MenuItem>
@@ -78,3 +82,5 @@ export default class Navbar extends Component {
         )
     }
 }
+
+export default withStyles(styles)(Navbar);

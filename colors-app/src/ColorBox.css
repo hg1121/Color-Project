@@ -110,9 +110,9 @@
     line-height: 30px;
 }
 
-/* .ColorBox .dark-text{
+.ColorBox .dark-text{
     color: rgba(0, 0, 0, 0.5);
-} */
+}
 
 .copy-overlay {
     opacity: 0;
