@@ -7,4 +7,6 @@ npm install --save @material-ui/core
 npm install --save @material-ui/icons
 npm install --save react-router-dom
 npm install --save @material-ui/styles             --- style mini palette write css in js
-npm install --save react-color
+npm install --save react-color                     --- make the 'create new palette section'
+
+connect colorpicker to "Add color" button
