@@ -6,7 +6,6 @@ npm install --save react-copy-to-clipboard
 npm install --save @material-ui/core
 npm install --save @material-ui/icons
 npm install --save react-router-dom
-npm install --save @material-ui/styles             --- style mini palette write css in js
-npm install --save react-color                     --- make the 'create new palette section'
-
-connect colorpicker to "Add color" button
+npm install --save @material-ui/styles               --- style mini palette write css in js
+npm install --save react-color                       --- make the 'create new palette section'
+npm install --save react-material-ui-form-validator@2.0.7 --force  --- make the color name validate when create new color box

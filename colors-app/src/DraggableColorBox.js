@@ -14,13 +14,13 @@ const styles = {
 }
 
 //childFunc need to take the props as input when taking props frpm parent function
-function DraggableColorBox({color, classes}) {
+function DraggableColorBox({color, classes, name}) {
 
         return (
             <div 
                 className={classes.root}
                 style={{backgroundColor: color, display: 'inline-block'}}>
-                {color}
+                {name}
             </div>
         )
     

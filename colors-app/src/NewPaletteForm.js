@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component , useEffect} from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -14,6 +14,7 @@ import { ChromePicker } from 'react-color';
 import { Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DraggableColorBox from './DraggableColorBox';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 const drawerWidth = 320;
 //theme is a default style library
@@ -81,7 +82,8 @@ export default function NewPaletteForm() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [currentColor,setCurrentColor] = React.useState('teal');
-    const [colors, setColors] = React.useState(['purple']);
+    const [colors, setColors] = React.useState([]);
+    const [newName, setNewName] = React.useState('');
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -96,8 +98,25 @@ export default function NewPaletteForm() {
     }
 
     const addNewColor = () => {
-        setColors([...colors, currentColor]);
+        const newColor = {
+            color: currentColor,
+            name: newName
+        };
+        setColors([...colors, newColor]);
+        setNewName('');
     }
+
+    const handleChange = (evt) => {
+        setNewName(evt.target.value);
+        console.log(newName);
+    }
+
+    useEffect( () => {
+        ValidatorForm.addValidationRule('isColorNameUnique', value => 
+            colors.every( ({ name }) => name.toLowerCase() !== value.toLowerCase() ));
+        ValidatorForm.addValidationRule('isColorUnique', value => 
+            colors.every( ({ color }) => color !== currentColor ) );
+    })
 
     return (
         <div className={classes.root}>
@@ -148,12 +167,23 @@ export default function NewPaletteForm() {
                 color={currentColor}
                 onChangeComplete={updateCurrentColor}
             />
-            <Button 
-                variant='contained' 
-                color='primary'
-                style={{ backgroundColor: currentColor }}
-                onClick={addNewColor}
-            >Add Color</Button>
+
+            <ValidatorForm onSubmit={addNewColor}>
+                <TextValidator
+                    value={newName}
+                    onChange={handleChange}
+                    validators={['required', 'isColorNameUnique', 'isColorUnique']}
+                    errorMessages={['Enter a Color Name', 'Color Name does exist', 'Color does exist']}
+                />
+                <Button 
+                    variant='contained' 
+                    color='primary'
+                    style={{ backgroundColor: currentColor }}
+                    type='submit'
+                >Add Color</Button>
+            </ValidatorForm>
+
+            
         </Drawer>
         <main
             className={clsx(classes.content, {
@@ -162,7 +192,7 @@ export default function NewPaletteForm() {
         >
             <div className={classes.drawerHeader} />
             {colors.map( color => 
-                <DraggableColorBox color={color} classes={classes}/>
+                <DraggableColorBox color={color.color} classes={classes} name={color.name}/>
             )}
         </main>
         </div>
