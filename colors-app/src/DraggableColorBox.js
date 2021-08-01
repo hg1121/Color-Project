@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
+import { SortableElement } from 'react-sortable-hoc';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = {
@@ -36,19 +37,20 @@ const styles = {
 }
 
 //childFunc need to take the props as input when taking props frpm parent function
-function DraggableColorBox({color, classes, name, handleDelete}) {
+const DraggableColorBox = SortableElement( ({color, classes, name, handleDelete}) => {
         return (
             <div 
                 className={classes.root}
-                style={{backgroundColor: color, display: 'inline-block'}}>
+                style={{backgroundColor: color, display: 'inline-block'}}
+            >
                 <div className={classes.boxcontent}>
                     <span>{name}</span>
-                    <DeleteIcon className={classes.deleteIcon} onClick={handleDelete}/>
+                    <DeleteIcon className={classes.deleteIcon} onClick={handleDelete} />
                 </div>
                 
             </div>
         )
     
-}
+})
 
 export default withStyles(styles)(DraggableColorBox);

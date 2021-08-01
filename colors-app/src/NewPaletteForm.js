@@ -13,10 +13,12 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import { Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import DraggableColorBox from './DraggableColorBox';
+import DraggableColorList from './DraggableColorList';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { arrayMove } from 'react-sortable-hoc';
 
 const drawerWidth = 320;
+const maxColors = 20;
 //theme is a default style library
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,7 +84,7 @@ export default function NewPaletteForm(props) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [currentColor,setCurrentColor] = React.useState('teal');
-    const [colors, setColors] = React.useState([]);
+    const [colors, setColors] = React.useState(props.palettes[0].colors);
     const [newColorName, setNewColorName] = React.useState('');
     const [newPaletteName, setNewPaletteName] = React.useState('');
 
@@ -106,10 +108,6 @@ export default function NewPaletteForm(props) {
         setColors([...colors, newColor]);
         setNewColorName('');
     }
-
-    // const handleChange = (evt) =>{
-        
-    // }
 
     useEffect( () => {
         ValidatorForm.addValidationRule('isColorNameUnique', value => 
@@ -135,12 +133,26 @@ export default function NewPaletteForm(props) {
     const removeColor = (colorName) => {
         setColors( colors.filter(color => color.name !== colorName));
     }
+    //make the position persist after box was dragged
+    const onSortEnd = ({oldIndex, newIndex}) => {
+        setColors(arrayMove(colors, oldIndex, newIndex));
+      };
+
+    const addRandomColor = () => {
+        // take all colors from all palettes and make them into one array use flat()
+        const allColors = props.palettes.map(p => p.colors).flat();
+        var rand = Math.floor(Math.random()*allColors.length);
+        const randomColor = allColors[rand];
+        setColors(colors => [...colors, randomColor]);
+
+    }
 
     return (
         <div className={classes.root}>
         <CssBaseline />
         <AppBar
             position="fixed"
+            color='default'
             className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
             })}
@@ -155,10 +167,10 @@ export default function NewPaletteForm(props) {
             >
                 <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-                Persistent drawer
+            <Typography variant="h6" color='inherit' noWrap>
+                Create New Palette
             </Typography>
-            <ValidatorForm onSubmit={handleSubmit}>
+            <ValidatorForm onSubmit={handleSubmit} >
                 <TextValidator  
                     value={newPaletteName} 
                     name='newPaletteName' 
@@ -167,7 +179,7 @@ export default function NewPaletteForm(props) {
                     validators={["required", "isPaletteNameUnique"]}
                     errorMessages={["Enter PaletteName", "Name Already used!"]}
                 />
-                <Button variant="contained"  color="secondary" type='submit'> Save Palette </Button>
+                <Button variant="contained"  color="primary" type='submit'> Save Palette </Button>
             </ValidatorForm>
             </Toolbar>
         </AppBar>
@@ -189,8 +201,22 @@ export default function NewPaletteForm(props) {
             <Divider />
             <Typography variant='h4'>Make your own palette</Typography>
             <div>
-                <Button variant='contained' color='secondary' startIcon={<DeleteIcon />}>Clear </Button>
-                <Button variant='contained' color='primary'>Random Color </Button>
+                <Button variant='contained' 
+                        color='secondary' 
+                        startIcon={<DeleteIcon />}
+                        onClick={() => setColors([])}
+                        disabled={colors.length == 0}
+                >
+                    {colors.length == 0 ? 'Palette is Empty' : 'Clear' }
+                </Button>
+                <Button 
+                        variant='contained' 
+                        color='primary'
+                        onClick={addRandomColor}
+                        disabled={colors.length >= maxColors}
+                >
+                    {colors.length >= maxColors ? 'Palette is Full': 'Random Color' }
+                </Button>
             </div>
             <ChromePicker 
                 color={currentColor}
@@ -210,7 +236,10 @@ export default function NewPaletteForm(props) {
                     color='primary'
                     style={{ backgroundColor: currentColor }}
                     type='submit'
-                >Add Color</Button>
+                    disabled={colors.length >= maxColors}
+                >
+                    {colors.length >= maxColors ? 'Palette is Full': 'Add Color'}
+                </Button>
             </ValidatorForm>
 
             
@@ -221,14 +250,12 @@ export default function NewPaletteForm(props) {
             })}
         >
             <div className={classes.drawerHeader} />
-            {colors.map( color => 
-                <DraggableColorBox 
-                    key={color.name}
-                    color={color.color} 
-                    classes={classes} 
-                    name={color.name} 
-                    handleDelete={ () => removeColor(color.name)}/>
-            )}
+            <DraggableColorList 
+                colors={colors} 
+                removeColor={removeColor}
+                axis='xy'
+                onSortEnd={onSortEnd}
+            />
         </main>
         </div>
     );
