@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   },
   content: {
     flexGrow: 1,
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   button: {
-    width: '50%'
+    width: '50%',
   },
   picker: {
     width: '100% !important',
@@ -98,12 +98,10 @@ export default function NewPaletteForm(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-    const [currentColor,setCurrentColor] = React.useState('teal');
+    const [currentColor,setCurrentColor] = React.useState('purple');
     const [colors, setColors] = React.useState(props.palettes[0].colors);
     const [newColorName, setNewColorName] = React.useState('');
     const [newPaletteName, setNewPaletteName] = React.useState('');
-
-    
 
     const handleDrawerClose = () => {
         setOpen(false);
