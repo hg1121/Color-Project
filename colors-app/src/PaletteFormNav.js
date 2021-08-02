@@ -6,17 +6,18 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-// import { Button } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-// import PaletteMetaForm from './PaletteMetaForm';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import 'emoji-mart/css/emoji-mart.css';
+import { Picker } from 'emoji-mart';
+
 
 const drawerWidth = 400;
 const useStyles = makeStyles((theme) => ({
@@ -55,20 +56,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PaletteFormNav(props) {
     const [pupOpen, setPupOpen] = React.useState(false);
+    const [openEmoji, setOpenEmoji] = React.useState(false);
     const {open, setOpen, colors, newPaletteName, setNewPaletteName, originalProps} = props;
     const classes = useStyles();
     const handleDrawerOpen = () => {
         setOpen(true);
     };
     //no need to pass props again inside this function
-    const handleSubmit = () => {
-        const newname = newPaletteName;
-        const newPalette = {
-            paletteName: newname, 
-            id: newname.toLocaleLowerCase().replace( / /g, "-"),
-            colors: colors};
-            originalProps.savePalette(newPalette);
-            originalProps.history.push('/');
+    const handleSubmit = (newPalette) => {
+        newPalette.id = newPalette.paletteName.toLocaleLowerCase().replace( / /g, "-");
+        newPalette.colors = colors;
+        originalProps.savePalette(newPalette);
+        originalProps.history.push('/');
     }
     useEffect( () => {
         ValidatorForm.addValidationRule('isPaletteNameUnique', value => 
@@ -82,6 +81,19 @@ export default function PaletteFormNav(props) {
 
     const handleClose = () => {
         setPupOpen(false);
+    }
+
+    const showEmojiPicker = () => {
+        setOpenEmoji(true);
+    }
+
+    const closeEmoji = () => {
+        setOpenEmoji(false);
+    }
+
+    const addEmoji = (emoji) => {
+        const newPalette = {paletteName: newPaletteName, emoji: emoji.native};
+        handleSubmit(newPalette);
     }
 
     return (
@@ -114,9 +126,14 @@ export default function PaletteFormNav(props) {
                     </Link>
                     <Button variant="contained" color="primary" onClick={handleOpen} className={classes.button}> Save Palette</Button>
                 </div>
+                {/* emoji part */}
+                <Dialog open={openEmoji} onClose={closeEmoji}>
+                    <Picker onSelect={addEmoji} title='Pick your emoji'/>
+                </Dialog>
+                {/* pupup content box part */}
                 <Dialog open={pupOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">Save</DialogTitle>
-                    <ValidatorForm onSubmit={handleSubmit} >
+                    <ValidatorForm onSubmit={showEmojiPicker} >
                     <DialogContent>
                     <DialogContentText>
                         Please enter a unique name for your new palette!
