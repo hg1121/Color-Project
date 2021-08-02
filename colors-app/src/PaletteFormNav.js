@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
       },
+    hide: {
+        display: 'none',
+    },
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
         easing: theme.transitions.easing.sharp,
@@ -32,9 +35,9 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'row',
         justifyContent: 'space-between', 
         alignItems: 'center', //control the vertical space
-        height: '64px'
+        height: '64px',
       },
-      appBarShift: {
+    appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
         transition: theme.transitions.create(['margin', 'width'], {
@@ -42,16 +45,15 @@ const useStyles = makeStyles((theme) => ({
         duration: theme.transitions.duration.enteringScreen,
         }),
       },
-      menuButton: {
+    menuButton: {
         marginRight: theme.spacing(2),
       },
-      navBtns: {
+    navBtns: {
           marginRight: '1rem'
       },
-      button: {
+    button: {
           margin: '0 0.5rem'
-      }
-
+      },
 }))
 
 export default function PaletteFormNav(props) {
@@ -59,6 +61,7 @@ export default function PaletteFormNav(props) {
     const [openEmoji, setOpenEmoji] = React.useState(false);
     const {open, setOpen, colors, newPaletteName, setNewPaletteName, originalProps} = props;
     const classes = useStyles();
+    const theme = useTheme();
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -102,23 +105,19 @@ export default function PaletteFormNav(props) {
             <AppBar
                 position="fixed"
                 color='default'
-                className={clsx(classes.appBar, {
-                [classes.appBarShift]: open,
-                })}
+                className={ clsx(classes.appBar, {[classes.appBarShift]: open}) }
             >
             <Toolbar>
-            <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                className={clsx(classes.menuButton, open && classes.hide)}
-            >
-                <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" color='inherit' noWrap>
-                Create New Palette
-            </Typography>
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleDrawerOpen}
+                    edge="start"
+                    className={clsx(classes.menuButton, open && classes.hide)}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" noWrap> Create New Palette </Typography>
             </Toolbar>
                 <div className={classes.navBtns}>
                     <Link to='/' style={{textDecoration: 'none'}}> 
