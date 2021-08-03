@@ -1,6 +1,6 @@
 import React, { useEffect} from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -97,7 +97,6 @@ const useStyles = makeStyles((theme) => ({
 //when you want to access props inside the function component
 export default function NewPaletteForm(props) {
     const classes = useStyles();
-    const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [currentColor,setCurrentColor] = React.useState('purple');
     const [colors, setColors] = React.useState(props.palettes[0].colors);
@@ -184,10 +183,10 @@ export default function NewPaletteForm(props) {
                             variant='contained' 
                             color='secondary' 
                             onClick={() => setColors([])}
-                            disabled={colors.length == 0}
+                            disabled={colors.length === 0}
                             startIcon= {colors.length !== 0 && <DeleteIcon />}
                     >
-                        {colors.length == 0 ? 'Palette is Empty' : 'Clear' }
+                        {colors.length === 0 ? 'Palette is Empty' : 'Clear' }
                     </Button>
                     <Button 
                             className={classes.button}

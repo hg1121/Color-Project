@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -75,7 +75,6 @@ export default function PaletteFormNav(props) {
     const [openEmoji, setOpenEmoji] = React.useState(false);
     const {open, setOpen, colors, newPaletteName, setNewPaletteName, originalProps} = props;
     const classes = useStyles();
-    const theme = useTheme();
     const handleDrawerOpen = () => {
         setOpen(true);
     };

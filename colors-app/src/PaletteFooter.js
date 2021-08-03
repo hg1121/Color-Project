@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 export default function PaletteFooter(props) {
     const {paletteName, emoji} = props; //function does not need this.props
