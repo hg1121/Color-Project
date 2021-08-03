@@ -17,12 +17,20 @@ export default {
         '& a': {
             textDecoration: 'none',
             color: 'black',
-        }
+        },
+        '@media (max-width: 768px)': {
+            width: '100px',   
+            fontSize: '15px',
+            fontWeight: 'bold'            
+        },
     },
     slider: {
         width: '340px',
         margin: '0 10px',
         display: 'inline-block',
+        '@media (max-width: 576px)': {
+                width: '200px',               
+        },
         '& .rc-slider-rail': {  
             height: '8px',
         },
@@ -44,11 +52,13 @@ export default {
             bottom: '-5px',
             marginLeft: '-1px'
         }
-
-
     },
     selectContainer: {
         marginLeft: 'auto',
         marginRight: '1rem',
-    }
+        '@media (max-width: 576px)': {
+            width: '100px',              
+        },
+        
+    },
 }

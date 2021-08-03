@@ -36,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between', 
         alignItems: 'center', //control the vertical space
         height: '64px',
+        '@media (max-width: 576px)': {
+            width: '100%',   
+            height: '8%',           
+        },
       },
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,
@@ -49,10 +53,20 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
       },
     navBtns: {
-          marginRight: '1rem'
+          marginRight: '0.5rem'
       },
+    menuMsg: {
+        '@media (max-width: 576px)': {
+            fontSize: '13px'          
+        },
+    },
     button: {
-          margin: '0 0.5rem'
+          margin: '0 0.5rem',
+          '@media (max-width: 576px)': {
+            fontSize: '10px',
+            margin: 0,   
+            height: '5%',           
+        },
       },
 }))
 
@@ -117,7 +131,7 @@ export default function PaletteFormNav(props) {
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" noWrap> Create New Palette </Typography>
+                <Typography variant="h6" noWrap className={classes.menuMsg}> Create New Palette </Typography>
             </Toolbar>
                 <div className={classes.navBtns}>
                     <Link to='/' style={{textDecoration: 'none'}}> 

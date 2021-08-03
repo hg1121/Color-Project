@@ -176,7 +176,7 @@ export default function NewPaletteForm(props) {
             <Divider />
             <Divider />
 
-            <div className={classes.container} position="fixed">
+            <div className={classes.container}>
                 <Typography variant='h4' gutterBottom>Create Palette</Typography>
                 <div className={classes.buttons}>
                     <Button 
@@ -233,9 +233,7 @@ export default function NewPaletteForm(props) {
             </div>
         </Drawer>
         <main
-            className={clsx(classes.content, {
-            [classes.contentShift]: open,
-            })}
+            className={clsx(classes.content, {[classes.contentShift]: open,})}
         >
             <div className={classes.drawerHeader} />
                 <DraggableColorList 

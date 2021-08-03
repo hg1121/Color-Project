@@ -14,7 +14,23 @@ const styles = {
         '&:hover svg': {
             color: 'white',
             transform: 'scale(1.5)'
-        }
+        },
+        '@media (max-width: 576px)': {
+            width: '100%',   
+            height: '5%',           
+        },
+        '@media (min-width: 576px)': {
+            width: '50%',   
+            height: '10%',           
+        },
+        '@media (min-width: 768px)': {
+            width: '25%',   
+            height: '20%',           
+        },
+        '@media (min-width: 992px)': {
+            width: '20%',   
+            height: '25%',           
+        },
     },
     boxcontent: {
         position: 'absolute',

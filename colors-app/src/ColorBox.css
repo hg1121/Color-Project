@@ -13,6 +13,56 @@
     height:50%;
 }
 
+/* Extra small devices (phones, 576px and down) */
+@media only screen and (max-width: 576px) {
+    .ColorBox{
+        width: 100%;
+        height: 5%;
+    }
+    .SingleColorPalette .ColorBox{
+        width: 100%;
+        height:10%;
+    }
+    .copy-msg h1{
+        font-size: 5rem;
+    }
+}
+/* Small devices (portrait tablets and large phones, 576px and up) */
+@media only screen and (min-width: 576px) {
+    .ColorBox{
+        width: 50%;
+        height: 10%;
+    }
+    .SingleColorPalette .ColorBox{
+        height:20%;
+    }
+    .copy-msg h1{
+        font-size: 5rem;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .ColorBox{
+        width: 25%;
+        height: 20%;
+    }
+    .SingleColorPalette .ColorBox{
+        height:35%;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .ColorBox{
+        width: 20%;
+        height: 25%
+    }
+    .SingleColorPalette .ColorBox{
+        height: 50%;
+    }
+}
+
 .go-back.ColorBox{
     background-color: black;
 }
