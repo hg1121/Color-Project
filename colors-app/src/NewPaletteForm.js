@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
     },
     chrome: {
         width: '100% !important'
-    }
+    },
   }));
 
 //when you want to access props inside the function component
@@ -231,16 +231,18 @@ export default function NewPaletteForm(props) {
                 </div>
             </div>
         </Drawer>
-        <main
-            className={clsx(classes.content, {[classes.contentShift]: open,})}
-        >
+
+        <main className={clsx(classes.content, {[classes.contentShift]: open,})} >
             <div className={classes.drawerHeader} />
+            <div >
                 <DraggableColorList 
                     colors={colors} 
                     removeColor={removeColor}
                     axis='xy'
                     onSortEnd={onSortEnd}
                 />
+            </div>
+            
         </main>
         </div>
     );

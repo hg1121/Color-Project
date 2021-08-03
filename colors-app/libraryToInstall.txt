@@ -16,3 +16,4 @@ npm install react-sortable-hoc --save                --- make the draggable colo
 npm install --save emoji-mart                        --- import emoji library
 svgBackground.com for background
 npm install --save react-transition-group            --- make animation when delete palettes
+dialog                                               --- popupwindow e.g. check if user want to delete palette

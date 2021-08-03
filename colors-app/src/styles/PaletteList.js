@@ -1,4 +1,6 @@
-import BackGroundImg from './BackGround.svg'
+import BackGroundImg from './BackGround.svg';
+import { blue } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 
 const styles = {
     '@global': {
@@ -16,7 +18,7 @@ const styles = {
         alignItems: 'flex-start',
         justifyContent: 'center',
         //background by SVGbackgrounds
-        backgroundColor: '#ffffff',
+        backgroundColor: '#aa3333',
         backgroundImage: `url(${BackGroundImg})`,
         overflow: 'scroll',
         '& h1': {
@@ -70,7 +72,15 @@ const styles = {
         '@media (min-width: 768px)': {
             gridTemplateColumns: 'repeat(3, 30%)',          
         },
-    }
+    },
+    avatarBlue: {
+        backgroundColor: blue[100],
+        color: blue[600],
+    },
+    avatarRed: {
+        backgroundColor: red[100],
+        color: red[600],
+    },
 }
 
 export default styles;

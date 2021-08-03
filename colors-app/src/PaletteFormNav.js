@@ -50,7 +50,8 @@ const useStyles = makeStyles((theme) => ({
         }),
       },
     menuButton: {
-        marginRight: theme.spacing(2),
+        marginLeft: 12,
+        marginRight: 20
       },
     navBtns: {
           marginRight: '0.5rem'
