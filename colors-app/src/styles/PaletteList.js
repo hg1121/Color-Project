@@ -1,10 +1,18 @@
+import BackGroundImg from './BackGround.svg'
+
 export default {
     root: {
-        backgroundColor: 'lightgreen',
         height: '100vh',
         display: 'flex',
         alignItems: 'flex-start',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        //background by SVGbackgrounds
+        backgroundColor: '#ffffff',
+        backgroundImage: `url(${BackGroundImg})`,
+        overflow: 'scroll',
+        '& h1': {
+            fontSize: '2rem',
+        }
     },
     container: {
         width: '50%',
@@ -18,11 +26,11 @@ export default {
         '@media (min-width: 576px)': {
             width: '80%',          
         },
-        '@media (min-width: 768px)': {
-            width: '70%',          
-        },
+        // '@media (min-width: 768px)': {
+        //     width: '70%',          
+        // },
         '@media (min-width: 992px)': {
-            width: '60%',          
+            width: '70%',          
         },
         '@media (min-width: 1200px)': {
             width: '50%',          
@@ -46,6 +54,12 @@ export default {
         gridGap: '5%',
         '@media (max-width: 576px)': {
             gridTemplateColumns: 'repeat(2, 47%)',          
+        },
+        '@media (min-width: 576px)': {
+            gridTemplateColumns: 'repeat(2, 47%)',          
+        },
+        '@media (min-width: 768px)': {
+            gridTemplateColumns: 'repeat(3, 30%)',          
         },
     }
 }

@@ -43,11 +43,15 @@ const styles = {
         textTransform: 'uppercase',
         fontSize: '12px',
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        '@media (max-width: 576px)': {
+            padding: '2px 10px',           
+        },
     },
     deleteIcon: {
         color: 'rgba(0,0,0,0.5)',
-        transition: 'all 0.3s ease-in-out'
+        transition: 'all 0.3s ease-in-out',
+        
     }
     
 }
