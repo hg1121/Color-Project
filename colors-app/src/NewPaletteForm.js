@@ -13,6 +13,7 @@ import DraggableColorList from './DraggableColorList';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { arrayMove } from 'react-sortable-hoc';
 import PaletteFormNav from './PaletteFormNav';
+import seedCorlors from './seedColors';
 
 const drawerWidth = 360;
 const maxColors = 20;
@@ -99,7 +100,7 @@ export default function NewPaletteForm(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [currentColor,setCurrentColor] = React.useState('purple');
-    const [colors, setColors] = React.useState(props.palettes[0].colors);
+    const [colors, setColors] = React.useState(seedCorlors[0].colors);
     const [newColorName, setNewColorName] = React.useState('');
     const [newPaletteName, setNewPaletteName] = React.useState('');
 
@@ -142,8 +143,8 @@ export default function NewPaletteForm(props) {
     const addRandomColor = () => {
         // take all colors from all palettes and make them into one array use flat()
         const allColors = props.palettes.map(p => p.colors).flat();
-        var rand = Math.floor(Math.random()*allColors.length);
-        const randomColor = allColors[rand];
+        let rand = Math.floor(Math.random()*allColors.length);
+        let randomColor = allColors[rand];
         setColors(colors => [...colors, randomColor]);
 
     }
@@ -205,7 +206,7 @@ export default function NewPaletteForm(props) {
                         color={currentColor}
                         onChangeComplete={updateCurrentColor}
                     />
-                    <ValidatorForm onSubmit={addNewColor}>
+                    <ValidatorForm onSubmit={addNewColor} useRef='form' instantValidate={false}>
                         <TextValidator
                             className={classes.colorInput}
                             value={newColorName}

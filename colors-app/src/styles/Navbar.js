@@ -57,7 +57,7 @@ const styles = {
         marginLeft: 'auto',
         marginRight: '1rem',
         '@media (max-width: 576px)': {
-            width: '100px',              
+            width: '80px',              
         },
         
     },

@@ -6,6 +6,8 @@
     transition: opacity 0.5s ease-in-out;
   }
 
+/* transform can be used for the slide animation from left to right */
+
 .page-enter {
     opacity: 0;
     /* transform: translateX(100%); */

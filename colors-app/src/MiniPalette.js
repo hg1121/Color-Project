@@ -3,7 +3,9 @@ import React from 'react';
 import styles from './styles/MiniPalette';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-function MiniPalette(props) {
+//React.memo can be used to prevent all palettes been rendered after one specific palette has been deleted
+const MiniPalette = React.memo(function MiniPalette(props){
+    
     const {classes, paletteName, emoji, colors, handleClick, openDialog, id} = props;
     const miniColorBoxes = colors.map( color => (
         <div className={classes.miniColor}
@@ -20,7 +22,7 @@ function MiniPalette(props) {
     }
     
     return (  
-        <div className={classes.root} onClick={handleClick}>    
+        <div className={classes.root} onClick={() => handleClick(id)}>    
         <DeleteIcon 
             className={classes.deleteIcon} 
             style={{transition: 'all 0.3s ease-in-out'}} 
@@ -36,6 +38,6 @@ function MiniPalette(props) {
             
         </div>
     )
-}
+});
 
 export default withStyles(styles)(MiniPalette);
